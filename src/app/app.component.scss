@@ -1,0 +1,119 @@
+@mixin statusColor($color){
+  border-color: $color;
+  background-color: rgba($color, .5);
+}
+.modal{
+  position: fixed;
+  width: 800px;
+  min-height: 310px;
+  padding-bottom: 30px;
+  border: solid 1px black;
+  left: 0;
+  right: 0;
+  margin: auto;
+  &__header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: #d6d6d6 solid 1px;
+  }
+  &__title{
+    margin: 0;
+    color: #666;
+  }
+  &__input{
+    background-color: #f5f5f5;
+    border: 1px solid #999;
+    display: inline-block;
+    max-width: 100%;
+  }
+  &__button{
+    display: inline-block;
+    outline: none !important;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    margin: 0;
+    border: 2px solid #666;
+    &:not(:last-of-type){
+      margin-right: 5px;
+    }
+    &_close{
+      border-color: #81c5ff;
+    }
+  }
+  &__body{
+    &::after{
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+.modal-gateway{
+  padding: 5px 30px 5px 10px;
+  width: 200px;
+  float: left;
+  &__title{
+    margin-top: 0;
+    margin-bottom: .5em;
+  }
+}
+.user-list{
+  margin: {
+    top: 10px;
+  };
+  padding: 0px 20px 5px 30px;
+  border-left: 1px solid #686868;
+  float: right;
+  width: calc(100% - 200px);
+  &__title{
+    margin-top: 0;
+    line-height: 1em;
+    margin-bottom: .5em;
+  }
+  &__category{
+    display: inline-block;
+    width: 30%;
+    margin-top: 0;
+    font-size: 1.04em;
+  }
+}
+.user-form{
+  margin-bottom: 10px;
+  &__field{
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+  }
+  &__status{
+    height: 26px;
+    width: 26px;
+    margin-left: 15px;
+    display: inline-block;
+    vertical-align: top;
+    border: solid 1px;
+    &_dis{
+      @include statusColor(#be605d);
+    }
+    &_unreg{
+      @include statusColor(#080606);
+    }
+    &_act-pen{
+      @include statusColor(#ebd594);
+    }
+    &_act{
+      @include statusColor(#adcfa0);
+    }
+  }
+  &__input{
+    &.ng-invalid{
+      border-color: red;
+      outline-color: red;
+    }
+  }
+}
