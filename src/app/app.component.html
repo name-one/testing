@@ -25,7 +25,7 @@
       <h3 class="user-list__category">Activation code</h3>
       <form *ngFor="let user of curGateAway.users; let i ='index'; " class="user-form" >
         <div class="user-form__field">
-          <input type="text" class="user-form__input modal__input" name="name"  [ngModel]="user.name" #name (blur)="validate(user , i, name)" maxlength="6" minlength="3" >
+          <input type="text" class="user-form__input modal__input" name="name"  [ngModel]="user.name" #name (blur)="validate(user , i, name)" maxlength="6" minlength="3" required >
         </div>
         <div class="user-form__field">
           <i class="user-form__status" [ngClass]='{"user-form__status_dis": user.status=="0", "user-form__status_unreg": user.status=="1", "user-form__status_act-pen": user.status=="2", "user-form__status_act": user.status=="3"}'></i>
