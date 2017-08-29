@@ -2,38 +2,41 @@
   {{gateWay.name}}
   <button class="show-modal" (click)="openModal(gateWay)">show modal</button>
 </div>
-<div class="modal" *ngIf='showModal'>
-  <div class="modal__header">
-    <h3 class="modal__title">Window title</h3>
-    <div class="modal__button-container">
-      <button class="modal__button"></button>
-      <button class="modal__button"></button>
-      <button class="modal__button modal__button_close" (click)='closeModal()'></button>
+<div class="modal" *ngIf='showModal' [class.modal_shown]='visModal'>
+  <div class="modal__backface"  (click)="closeModal()"></div>
+  <div class="modal__container">
+    <div class="modal__header">
+      <h3 class="modal__title">Window title</h3>
+      <div class="modal__button-container">
+        <button class="modal__button"></button>
+        <button class="modal__button"></button>
+        <button class="modal__button modal__button_close" (click)='closeModal()'></button>
+      </div>
     </div>
-  </div>
-  <div class="modal__body">
-    <div class="modal-gateway">
-      <h2 class="modal-gateway__title">Gateway</h2>
-      <form class="modal-gateway__form">
-        <input type="text" class="modal-gateway__name modal__input" [(ngModel)]='curGateAway.name' name='gateway-name'>
-      </form>
-    </div>
-    <div class="user-list">
-      <h2 class="user-list__title">User list</h2>
-      <h3 class="user-list__category">Name</h3>
-      <h3 class="user-list__category">Status</h3>
-      <h3 class="user-list__category">Activation code</h3>
-      <form *ngFor="let user of curGateAway.users; let i ='index'; " class="user-form" >
-        <div class="user-form__field">
-          <input type="text" class="user-form__input modal__input" name="name"  [ngModel]="user.name" #name (blur)="validate(user , i, name)" maxlength="6" minlength="3" required >
-        </div>
-        <div class="user-form__field">
-          <i class="user-form__status" [ngClass]='{"user-form__status_dis": user.status=="0", "user-form__status_unreg": user.status=="1", "user-form__status_act-pen": user.status=="2", "user-form__status_act": user.status=="3"}'></i>
-        </div>
-        <div class="user-form__field">
-          <input type="text"class="user-form__input modal__input" name="activationCode" [(ngModel)]="user.activationCode">
-        </div>
-      </form>
+    <div class="modal__body">
+      <div class="modal-gateway">
+        <h2 class="modal-gateway__title">Gateway</h2>
+        <form class="modal-gateway__form">
+          <input type="text" class="modal-gateway__name modal__input" [(ngModel)]='curGateAway.name' name='gateway-name'>
+        </form>
+      </div>
+      <div class="user-list">
+        <h2 class="user-list__title">User list</h2>
+        <h3 class="user-list__category">Name</h3>
+        <h3 class="user-list__category">Status</h3>
+        <h3 class="user-list__category">Activation code</h3>
+        <form *ngFor="let user of curGateAway.users; let i ='index'; " class="user-form" >
+          <div class="user-form__field">
+            <input type="text" class="user-form__input modal__input" name="name"  [ngModel]="user.name" #name (blur)="validate(user , i, name)" maxlength="6" minlength="3" required >
+          </div>
+          <div class="user-form__field">
+            <i class="user-form__status" [ngClass]='{"user-form__status_dis": user.status=="0", "user-form__status_unreg": user.status=="1", "user-form__status_act-pen": user.status=="2", "user-form__status_act": user.status=="3"}'></i>
+          </div>
+          <div class="user-form__field">
+            <input type="text"class="user-form__input modal__input" name="activationCode" [(ngModel)]="user.activationCode" (keyup)='changeUserStatus(user)'>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

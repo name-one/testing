@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from  '@angular/core';
+
 import { UserService } from './services/user.service';
+
 import { Gateway } from './models/gateway';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +11,8 @@ import { Gateway } from './models/gateway';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  showModal = false;
+  showModal : boolean = false;
+  visModal : boolean = false;
   gateWays: Gateway[];
   curGateAway: Gateway;
   constructor( private userService: UserService){
@@ -21,10 +25,17 @@ export class AppComponent {
   public openModal(gateway: Gateway):void{
     this.curGateAway = gateway;
     this.showModal = true;
-    console.log(this.curGateAway)
+    let timeout = setTimeout(()=>{
+      this.visModal = true;
+      clearTimeout(timeout);
+    },10);
   }
   public closeModal():void{
-    this.showModal = false;
+    this.visModal = false;
+    let timeout = setTimeout(()=>{
+      this.showModal = false;
+      clearTimeout(timeout);
+    },300);
   }
   public validate(user,index, name){
     console.log(index, name.value)
@@ -32,5 +43,9 @@ export class AppComponent {
       user.name = name.value
     }
     console.log(user.name)
+  }
+  public changeUserStatus(user: User){
+    console.log(user)
+    this.userService.sendNewActivationCode(user)
   }
 }
